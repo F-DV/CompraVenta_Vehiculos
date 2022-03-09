@@ -13,4 +13,14 @@ public class Atencion_Al_Cliente extends AggregateEvent<Atencion_Al_ClienteId>{
     public Atencion_Al_Cliente(Atencion_Al_ClienteId entityId, Asesor asesor,Sucursal sucursal, PQRS pqrs) {
         super(entityId);
     }
+
+    public void sucursalAgregada(){
+
+    }
+
+    public void nuevoPQRSCreado(){
+
+    }
+
+
 }
