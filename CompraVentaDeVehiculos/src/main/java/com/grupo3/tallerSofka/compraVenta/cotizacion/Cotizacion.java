@@ -1,10 +1,12 @@
 package com.grupo3.tallerSofka.compraVenta.cotizacion;
 
 import co.com.sofka.domain.generic.AggregateEvent;
+import co.com.sofka.domain.generic.DomainEvent;
 import com.grupo3.tallerSofka.compraVenta.cotizacion.events.DatosModificados;
 import com.grupo3.tallerSofka.compraVenta.cotizacion.events.IntencionModificada;
 import com.grupo3.tallerSofka.compraVenta.cotizacion.values.*;
 
+import java.util.List;
 import java.util.Objects;
 
 public class Cotizacion extends AggregateEvent<CotizacionId> {
@@ -27,6 +29,12 @@ public class Cotizacion extends AggregateEvent<CotizacionId> {
     private Cotizacion (CotizacionId entityId){
         super(entityId);
         subscribe(new CotizacionChange(this));
+    }
+
+    public static Cotizacion from(CotizacionId entityId, List<DomainEvent> events){
+        Cotizacion cotizacion = new Cotizacion(entityId);
+        events.forEach(cotizacion::applyEvent);
+        return cotizacion;
     }
 
     public void modificarDatos(Compra compra){
